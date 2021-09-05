@@ -6,7 +6,7 @@ const routes = require('./routes')
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-app.use(express.static(path.join('../public')));
+app.use(express.static(path.join('./public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
