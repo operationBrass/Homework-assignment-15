@@ -1,24 +1,31 @@
 const router = require('express').Router();
-const { Exercise } = require('../models');
+const { Workout }  = require('../models');
+const path = require('path');
 
 router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../public/exercise.html"))
+    res.sendFile(path.join(__dirname, "../../public/Workout.html"))
 });
 
 router.get("/workouts", async (req, res) => {
-
-    // i need to return the last row in the exercise table
-    const exercises = await Exercise.find({});
-    return (res.json(exercises));
-
-
+    // i need to return the last row in the Workout table
+    Workout.aggregate([
+        {
+          $addFields: {
+            totalDuration: { $sum: "$exercises.duration" },
+          },
+        },
+      ]).then((data) => {
+        res.json(data);
+      }).catch((err) => res.status(500).json(err)) 
 });
 
 
-router.get("/workouts:id", (req, res) => {
+router.get("/workouts/:id", async (req, res) => {
 
-    // i need to return a specific row in the exercise table
-
+    // i need to return a specific row in the Workout table
+    console.log(res.params)
+    const workout = await Workout.find({_id:req.params.id});
+    return (res.json(workout));
 });
 
 router.get("/workouts/range", (req, res) => {
@@ -38,7 +45,7 @@ router.post("/workouts", (req, res) => {
 
 router.post("/workouts:id", (req, res) => {
 
-    // i need to post a new exercise to an existing workout
+    // i need to post a new Workout to an existing workout
 
 });
 
