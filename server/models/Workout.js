@@ -5,7 +5,7 @@ const workoutSchema = new mongoose.Schema({
     day: Date,
     exercises: [
         {
-            type: String,
+            type:{String} ,
             name: String,
             duration: Number,      
             weight: Number,         
@@ -13,8 +13,10 @@ const workoutSchema = new mongoose.Schema({
             sets: Number,
             distance:Number
         }
-    ],
-});
+    ]
+},
+    { typeKey: '$type' }
+);
 
 module.exports = mongoose.model("Workout", workoutSchema);
 //The first argument is the singular uppercase name of your database collection.
