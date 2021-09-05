@@ -6,15 +6,15 @@ const workoutSchema = new mongoose.Schema({
         {
             type: {
                 type: String,
-                // required: true
+         
             },
             name: {
                 type: String,
-                // required: true
+             
             },
             duration: {
                 type: Number,
-                // required: true
+               
             },
             weight: {
                 type: Number,
