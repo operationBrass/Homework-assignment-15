@@ -5,9 +5,9 @@
   "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run seed && node server/index.js",
+    "start": "node server/index.js",
     "watch": "nodemon server/index.js",
-    "seed": "node seeders/seed.js"
+    "seed": "node server/seeders/seed.js"
   },
   "author": "",
   "license": "MIT",
